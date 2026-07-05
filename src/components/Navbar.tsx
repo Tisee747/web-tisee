@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { Palette } from 'lucide-react';
+import { useTheme, AccentTheme } from './ThemeProvider';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -17,6 +19,15 @@ export default function Navbar() {
   const pathname = usePathname();
   const [activeHash, setActiveHash] = useState('');
   const [mounted, setMounted] = useState(false);
+  const { accentTheme, setAccentTheme } = useTheme();
+
+  const themes: AccentTheme[] = ['cyberpunk', 'matrix', 'retro', 'nebula'];
+
+  const cycleTheme = () => {
+    const currentIndex = themes.indexOf(accentTheme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setAccentTheme(themes[nextIndex]);
+  };
 
   // Monitor the hash change on scroll
   useEffect(() => {
@@ -95,6 +106,16 @@ export default function Navbar() {
             </Link>
           );
         })}
+
+        {/* Paint Palette Cycle Theme Button */}
+        <button
+          onClick={cycleTheme}
+          className="relative p-1.5 rounded-full hover:bg-foreground/5 text-foreground/75 hover:text-cyan-accent transition-colors cursor-pointer select-none ml-1 flex items-center justify-center shrink-0"
+          title={`Cycle Accent Theme (Active: ${accentTheme})`}
+        >
+          <Palette size={14} className="sm:w-[16px] sm:h-[16px]" />
+          <span className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-cyan-accent" />
+        </button>
       </nav>
     </div>
   );

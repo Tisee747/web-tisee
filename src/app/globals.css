@@ -16,16 +16,42 @@
   --font-mono: var(--font-mono);
 }
 
-/* Dark Mode Only */
+/* Dark Mode Only & Theme Accents */
 :root {
   --background: #030303;
   --foreground: #f3f4f6;
   --card-bg: rgba(255, 255, 255, 0.02);
   --card-border: rgba(255, 255, 255, 0.08);
   --grid-color: rgba(255, 255, 255, 0.05);
+  
+  /* Cyberpunk (Default) */
   --cyan-accent: #00F0FF;
   --magenta-accent: #FF00E5;
-  --glow-color: rgba(0, 240, 255, 0.1);
+  --glow-color: rgba(0, 240, 255, 0.15);
+}
+
+[data-theme="cyberpunk"] {
+  --cyan-accent: #00F0FF;
+  --magenta-accent: #FF00E5;
+  --glow-color: rgba(0, 240, 255, 0.15);
+}
+
+[data-theme="matrix"] {
+  --cyan-accent: #10B981; /* Emerald Green */
+  --magenta-accent: #059669; /* Darker Green */
+  --glow-color: rgba(16, 185, 129, 0.15);
+}
+
+[data-theme="retro"] {
+  --cyan-accent: #F59E0B; /* Amber/Orange */
+  --magenta-accent: #D97706; /* Darker Orange */
+  --glow-color: rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="nebula"] {
+  --cyan-accent: #A855F7; /* Purple */
+  --magenta-accent: #EC4899; /* Pink */
+  --glow-color: rgba(168, 85, 247, 0.15);
 }
 
 html {
