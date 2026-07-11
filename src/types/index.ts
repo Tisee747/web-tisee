@@ -23,6 +23,7 @@ export interface TimelineItem {
   period: string;
   description: string;
   technologies: string[];
+  image?: string;
 }
 
 export interface ContactInfo {

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Download } from 'lucide-react';
 import SectionHeading from '@/components/SectionHeading';
 import Hero3DWrapper from '@/components/Hero3DWrapper';
@@ -246,13 +247,24 @@ export default function Home() {
                         className="glass p-4 pb-10 rounded-2xl flex flex-col items-center justify-center border border-card-border hover:shadow-lg transition-all duration-500 transform hover:scale-[1.03]"
                       >
                         {/* Inner photo container */}
-                        <div className="w-full aspect-video md:aspect-[4/3] rounded-lg border border-dashed border-foreground/20 dark:border-white/10 hover:border-cyan-accent/30 bg-black/5 dark:bg-white/5 flex flex-col items-center justify-center text-center p-6 transition-colors duration-300">
-                          <span className="text-xs font-mono font-bold text-foreground/40 mb-0.5">
-                            [ Polaroid Frame ]
-                          </span>
-                          <span className="text-[10px] font-mono text-foreground/30">
-                            {step.stage} Era Photograph
-                          </span>
+                        <div className="w-full aspect-video md:aspect-[4/3] rounded-lg border border-dashed border-foreground/20 dark:border-white/10 hover:border-cyan-accent/30 bg-black/5 dark:bg-white/5 flex flex-col items-center justify-center text-center p-6 transition-colors duration-300 relative overflow-hidden">
+                          {step.image ? (
+                            <Image 
+                              src={step.image} 
+                              alt={`${step.stage} Era Photograph`} 
+                              fill 
+                              className="object-cover transition-transform duration-700 hover:scale-110 cursor-pointer" 
+                            />
+                          ) : (
+                            <>
+                              <span className="text-xs font-mono font-bold text-foreground/40 mb-0.5">
+                                [ Polaroid Frame ]
+                              </span>
+                              <span className="text-[10px] font-mono text-foreground/30">
+                                {step.stage} Era Photograph
+                              </span>
+                            </>
+                          )}
                         </div>
                         
                         {/* Handwritten Style Caption */}

@@ -14,7 +14,8 @@ export const journeyData: JourneyStep[] = [
     period: 'Feb 2021 - Jan 2023',
     subTitle: 'Junior High School Era',
     description: 'Began exploring the digital industry early while completing junior high school. Managed promotional content creation, designed newsletters via Shopify, scheduled uploads, and handled customer interactions to maintain consistent brand engagement.',
-    technologies: ['Shopify', 'Canva', 'Email Marketing', 'E-Commerce Operations']
+    technologies: ['Shopify', 'Canva', 'Email Marketing', 'E-Commerce Operations'],
+    image: '/images/journey/lensza.jpg'
   },
   {
     id: 'smk-indicator',
@@ -24,17 +25,19 @@ export const journeyData: JourneyStep[] = [
     period: 'Feb 2023 - Aug 2023',
     subTitle: 'Vocational High School Era',
     description: 'Transitioned into technical research at a Big Data & AI institute. Performed web scraping and data crawling using advanced regular expressions (RegEx) and automation scripts. Supported deployment, data analysis, and internal productivity tool developments.',
-    technologies: ['Python', 'RegEx', 'Web Scraping', 'Automation Tools', 'Data Processing']
+    technologies: ['Python', 'RegEx', 'Web Scraping', 'Automation Tools', 'Data Processing'],
+    image: '/images/journey/indicator.jpg'
   },
   {
     id: 'university-medusa',
     stage: 'University',
-    title: 'Bachelor of Informatics & Medusa Tech Intern',
-    company: 'Telkom University & Medusa Technology',
+    title: 'Medusa Tech Intern',
+    company: 'Medusa Technology',
     period: 'Sep 2023 - Present',
-    subTitle: 'University Era & Professional Internships',
-    description: 'Enrolled in Bachelor of Informatics at Telkom University (GPA: 3.66/4.00) and joined the AI Laboratory Study Group. Completed a Programming Internship at Medusa Tech (Jun - Aug 2026), building intelligent Llama-3/RAG NPC chatbots, deploying REST APIs on AWS EC2, and programming virtual world systems via LSL.',
-    technologies: ['Node.js', 'Go', 'FastAPI', 'AWS EC2', 'Llama 3', 'LangChain', 'ChromaDB', 'Linden Scripting Language (LSL)']
+    subTitle: 'Professional Internships',
+    description: 'Completed a Programming Internship at Medusa Tech (Jun - Aug 2026), building intelligent Llama-3/RAG NPC chatbots, deploying REST APIs on AWS EC2, and programming virtual world systems via LSL.',
+    technologies: ['Node.js', 'Go', 'FastAPI', 'AWS EC2', 'Llama 3', 'LangChain', 'ChromaDB', 'Linden Scripting Language (LSL)'],
+    image: '/images/journey/medusa.jpg'
   }
 ];
 
