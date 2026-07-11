@@ -27,19 +27,19 @@ export const journeyData: JourneyStep[] = [
     description: 'Transitioned into technical research at a Big Data & AI institute. Performed web scraping and data crawling using advanced regular expressions (RegEx) and automation scripts. Supported deployment, data analysis, and internal productivity tool developments.',
     technologies: ['Python', 'RegEx', 'Web Scraping', 'Automation Tools', 'Data Processing'],
     image: '/images/journey/indicator.jpg',
-    imageCaption: 'With the Data Sensor team'
+    imageCaption: 'PT. Indonesia Indicator Data Sensor Team, 2022'
   },
   {
     id: 'university-medusa',
     stage: 'University',
     title: 'Medusa Tech Intern',
     company: 'Medusa Technology',
-    period: 'Sep 2023 - Present',
+    period: 'Jun 2026 - Aug 2026',
     subTitle: 'Professional Internships',
     description: 'Completed a Programming Internship at Medusa Tech (Jun - Aug 2026), building intelligent Llama-3/RAG NPC chatbots, deploying REST APIs on AWS EC2, and programming virtual world systems via LSL.',
     technologies: ['Node.js', 'Go', 'FastAPI', 'AWS EC2', 'Llama 3', 'LangChain', 'ChromaDB', 'Linden Scripting Language (LSL)'],
     image: '/images/journey/medusa.jpg',
-    imageCaption: 'With the CEO at Medusa HQ'
+    imageCaption: 'Pluit Landmark Medusa Technology, 2026'
   }
 ];
 
