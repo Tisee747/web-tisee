@@ -81,23 +81,6 @@ export const projectsData: Project[] = [
     ]
   },
   {
-    id: 'mydormitory',
-    title: 'MyDormitory',
-    description: 'A dormitory attendance tracking and security check-in system featuring instant QR scan verifications. Built with a Laravel administrative panel and a companion mobile app developed in Flutter.',
-    tags: ['Fullstack'],
-    technologies: ['Laravel', 'Flutter', 'PHP', 'Dart'],
-    repoUrl: 'https://github.com/Tisee747/mydormitory-backend',
-    version: 'v1.0.8',
-    status: 'Beta',
-    stars: 0,
-    forks: 0,
-    mockLogs: [
-      '[SEC] AES-256 QR encryptor: READY',
-      '[AUTH] JWT session worker spawned',
-      '[SYSTEM] Dormitory DB synchronized'
-    ]
-  },
-  {
     id: 'telyutalks',
     title: 'TelyuTalks',
     description: 'An academic Q&A platform tailored for university students and lecturers to exchange course knowledge. Developed as a Java-based Progressive Web App (PWA) to ensure seamless mobile-desktop accessibility.',
@@ -114,7 +97,40 @@ export const projectsData: Project[] = [
       '[API] Discussion channels online'
     ]
   },
+  {
+    id: 'medusa-npc',
+    title: 'Intelligent AI NPC Chatbot',
+    description: 'Developed during Medusa Tech internship. Built an advanced interactive NPC chatbot using Llama 3, LangChain, and ChromaDB vector store. Features player-specific memory and Retrieval-Augmented Generation (RAG).',
+    tags: ['AI', 'Backend'],
+    technologies: ['Python', 'Llama 3', 'LangChain', 'ChromaDB'],
+    version: 'v1.2.0',
+    status: 'Live',
+    stars: 0,
+    forks: 0,
+    mockLogs: [
+      '[AI] RAG database query verified',
+      '[LANG] ChromaDB vector dimensions: 1536',
+      '[LLM] Context window: 8192 tokens'
+    ]
+  },
   // Other projects (available on projects page)
+  {
+    id: 'mydormitory',
+    title: 'MyDormitory',
+    description: 'A dormitory attendance tracking and security check-in system featuring instant QR scan verifications. Built with a Laravel administrative panel and a companion mobile app developed in Flutter.',
+    tags: ['Fullstack'],
+    technologies: ['Laravel', 'Flutter', 'PHP', 'Dart'],
+    repoUrl: 'https://github.com/Tisee747/mydormitory-backend',
+    version: 'v1.0.8',
+    status: 'Beta',
+    stars: 0,
+    forks: 0,
+    mockLogs: [
+      '[SEC] AES-256 QR encryptor: READY',
+      '[AUTH] JWT session worker spawned',
+      '[SYSTEM] Dormitory DB synchronized'
+    ]
+  },
   {
     id: 'gpt-ner',
     title: 'GPT-NER Implementation',
@@ -165,22 +181,6 @@ export const projectsData: Project[] = [
       '[ML] CatBoost regression initialized',
       '[DATA] Feature scaling matrix loaded',
       '[UI] Streamlit interface active'
-    ]
-  },
-  {
-    id: 'medusa-npc',
-    title: 'Intelligent AI NPC Chatbot',
-    description: 'Developed during Medusa Tech internship. Built an advanced interactive NPC chatbot using Llama 3, LangChain, and ChromaDB vector store. Features player-specific memory and Retrieval-Augmented Generation (RAG).',
-    tags: ['AI', 'Backend'],
-    technologies: ['Python', 'Llama 3', 'LangChain', 'ChromaDB'],
-    version: 'v1.2.0',
-    status: 'Live',
-    stars: 0,
-    forks: 0,
-    mockLogs: [
-      '[AI] RAG database query verified',
-      '[LANG] ChromaDB vector dimensions: 1536',
-      '[LLM] Context window: 8192 tokens'
     ]
   },
   {
