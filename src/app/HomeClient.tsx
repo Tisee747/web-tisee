@@ -16,8 +16,8 @@ interface HomeClientProps {
 }
 
 export default function HomeClient({ projects }: HomeClientProps) {
-  // Filter featured projects (only those with demo URLs)
-  const featuredProjects = projects.filter(project => project.demoUrl);
+  // Use the top 4 projects as featured
+  const featuredProjects = projects.slice(0, 4);
 
   const getPolaroidCaption = (stage: string) => {
     switch (stage) {
