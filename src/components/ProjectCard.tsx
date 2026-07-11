@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, MouseEvent } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
@@ -24,16 +25,38 @@ const getTagColor = (tag: ProjectTag) => {
 };
 
 export default function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    cardRef.current.style.setProperty('--mouse-x', `${x}px`);
+    cardRef.current.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   return (
     <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="glow-card glass rounded-3xl p-6 flex flex-col h-full group transition-all duration-300 relative overflow-hidden"
     >
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cyan-accent/5 to-magenta-accent/5 rounded-full blur-2xl -mr-16 -mt-16 opacity-40 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      {/* Dynamic Spotlight Glow */}
+      <div 
+        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-0"
+        style={{
+          background: `radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255,255,255,0.06), transparent 40%)`
+        }}
+      />
 
-      {/* Browser Screenshot Mockup Window */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cyan-accent/5 to-magenta-accent/5 rounded-full blur-2xl -mr-16 -mt-16 opacity-40 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
+
+      <div className="relative z-10 flex flex-col h-full">
+        {/* Browser Screenshot Mockup Window */}
       <div className="relative w-full aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm">
         {/* Browser Top Bar Controls */}
         <div className="bg-foreground/5 border-b border-card-border/60 px-3 py-2 flex items-center gap-1.5">
@@ -125,6 +148,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
             <span>Live</span>
           </Link>
         )}
+      </div>
       </div>
     </motion.div>
   );
