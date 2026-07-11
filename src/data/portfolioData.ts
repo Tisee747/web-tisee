@@ -24,7 +24,7 @@ export const journeyData: JourneyStep[] = [
     company: 'PT. Indonesia Indicator',
     period: 'Feb 2023 - Aug 2023',
     subTitle: 'Vocational High School Era',
-    description: 'Transitioned into technical research at a Big Data & AI institute. Performed web scraping and data crawling using advanced regular expressions (RegEx) and automation scripts. Supported deployment, data analysis, and internal productivity tool developments.',
+    description: 'Transitioned into technical research at a Big Data & AI institute. In this photo, I am with the Data Sensor team. Performed web scraping and data crawling using advanced regular expressions (RegEx) and automation scripts. Supported deployment, data analysis, and internal productivity tool developments.',
     technologies: ['Python', 'RegEx', 'Web Scraping', 'Automation Tools', 'Data Processing'],
     image: '/images/journey/indicator.jpg'
   },
@@ -35,7 +35,7 @@ export const journeyData: JourneyStep[] = [
     company: 'Medusa Technology',
     period: 'Sep 2023 - Present',
     subTitle: 'Professional Internships',
-    description: 'Completed a Programming Internship at Medusa Tech (Jun - Aug 2026), building intelligent Llama-3/RAG NPC chatbots, deploying REST APIs on AWS EC2, and programming virtual world systems via LSL.',
+    description: 'Completed a Programming Internship at Medusa Tech (Jun - Aug 2026), building intelligent Llama-3/RAG NPC chatbots, deploying REST APIs on AWS EC2, and programming virtual world systems via LSL. In this photo, I am at the Medusa office taking a picture with the CEO.',
     technologies: ['Node.js', 'Go', 'FastAPI', 'AWS EC2', 'Llama 3', 'LangChain', 'ChromaDB', 'Linden Scripting Language (LSL)'],
     image: '/images/journey/medusa.jpg'
   }
@@ -182,23 +182,6 @@ export const projectsData: Project[] = [
       '[AI] RAG database query verified',
       '[LANG] ChromaDB vector dimensions: 1536',
       '[LLM] Context window: 8192 tokens'
-    ]
-  },
-  {
-    id: 'medusa-aws-api',
-    title: 'AWS Scalable REST APIs',
-    description: 'Built high-throughput REST APIs during Medusa Tech internship using FastAPI. Deployed on AWS EC2 instances, optimizing Linux server processes, and integrating MariaDB databases to synchronize actions.',
-    tags: ['Backend'],
-    technologies: ['FastAPI', 'Python', 'AWS EC2', 'MariaDB'],
-    repoUrl: 'https://github.com/Tisee747/aws-fastapi-services',
-    version: 'v2.0.0',
-    status: 'Live',
-    stars: 84,
-    forks: 16,
-    mockLogs: [
-      '[AWS] EC2 autoscaling group online',
-      '[API] FastAPI server ready on port 80',
-      '[DB] MariaDB write pool active'
     ]
   },
   {
