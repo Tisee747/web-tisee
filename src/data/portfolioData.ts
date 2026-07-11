@@ -24,9 +24,10 @@ export const journeyData: JourneyStep[] = [
     company: 'PT. Indonesia Indicator',
     period: 'Feb 2023 - Aug 2023',
     subTitle: 'Vocational High School Era',
-    description: 'Transitioned into technical research at a Big Data & AI institute. In this photo, I am with the Data Sensor team. Performed web scraping and data crawling using advanced regular expressions (RegEx) and automation scripts. Supported deployment, data analysis, and internal productivity tool developments.',
+    description: 'Transitioned into technical research at a Big Data & AI institute. Performed web scraping and data crawling using advanced regular expressions (RegEx) and automation scripts. Supported deployment, data analysis, and internal productivity tool developments.',
     technologies: ['Python', 'RegEx', 'Web Scraping', 'Automation Tools', 'Data Processing'],
-    image: '/images/journey/indicator.jpg'
+    image: '/images/journey/indicator.jpg',
+    imageCaption: 'With the Data Sensor team'
   },
   {
     id: 'university-medusa',
@@ -35,9 +36,10 @@ export const journeyData: JourneyStep[] = [
     company: 'Medusa Technology',
     period: 'Sep 2023 - Present',
     subTitle: 'Professional Internships',
-    description: 'Completed a Programming Internship at Medusa Tech (Jun - Aug 2026), building intelligent Llama-3/RAG NPC chatbots, deploying REST APIs on AWS EC2, and programming virtual world systems via LSL. In this photo, I am at the Medusa office taking a picture with the CEO.',
+    description: 'Completed a Programming Internship at Medusa Tech (Jun - Aug 2026), building intelligent Llama-3/RAG NPC chatbots, deploying REST APIs on AWS EC2, and programming virtual world systems via LSL.',
     technologies: ['Node.js', 'Go', 'FastAPI', 'AWS EC2', 'Llama 3', 'LangChain', 'ChromaDB', 'Linden Scripting Language (LSL)'],
-    image: '/images/journey/medusa.jpg'
+    image: '/images/journey/medusa.jpg',
+    imageCaption: 'With the CEO at Medusa HQ'
   }
 ];
 

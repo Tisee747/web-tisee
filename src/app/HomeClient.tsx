@@ -274,7 +274,7 @@ export default function HomeClient({ projects }: HomeClientProps) {
                         
                         {/* Handwritten Style Caption */}
                         <p className="text-xs sm:text-sm font-semibold text-foreground/60 italic tracking-wider text-center mt-5 font-mono select-none pointer-events-none">
-                          * {getPolaroidCaption(step.stage)} *
+                          * {step.imageCaption || getPolaroidCaption(step.stage)} *
                         </p>
                       </div>
                     </div>

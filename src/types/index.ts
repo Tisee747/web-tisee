@@ -24,6 +24,7 @@ export interface TimelineItem {
   description: string;
   technologies: string[];
   image?: string;
+  imageCaption?: string;
 }
 
 export interface ContactInfo {
