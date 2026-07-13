@@ -127,6 +127,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                         src={imgs[0]} 
                         alt={`${projects[currentIndex].title} Preview`}
                         className="w-full h-full object-cover"
+                        style={{ objectPosition: projects[currentIndex].imagePosition || 'top' }}
                       />
                     </div>
                   );

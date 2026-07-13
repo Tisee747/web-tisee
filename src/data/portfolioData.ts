@@ -97,7 +97,7 @@ export const projectsData: Project[] = [
     technologies: ['Java', 'Spring Boot', 'PWA'],
     repoUrl: 'https://github.com/Tisee747/TelyuTalks',
     projectLayout: 'web',
-    imagePosition: 'right',
+    imagePosition: 'left',
     images: [
       '/images/projects/telyutalk_web.png'
     ],

@@ -52,15 +52,15 @@ const ProjectMedia = ({ project }: { project: Project }) => {
             src={images[0]} 
             alt={`${project.title} Preview`} 
             className="w-full h-full object-cover transition-transform duration-700 group-hover/media:scale-105 z-10" 
-            style={{ objectPosition: project.imagePosition || 'center' }}
+            style={{ objectPosition: project.imagePosition || 'top' }}
           />
         )}
 
         {/* Double Image Layout (Side by Side Cover) */}
         {images.length === 2 && (
           <div className="flex w-full h-full items-center justify-center gap-1 z-10">
-            <img src={images[0]} alt="" className="w-1/2 h-full object-cover transition-transform duration-700 hover:scale-[1.03] hover:z-20" />
-            <img src={images[1]} alt="" className="w-1/2 h-full object-cover transition-transform duration-700 hover:scale-[1.03] hover:z-20" />
+            <img src={images[0]} alt="" className="w-1/2 h-full object-cover transition-transform duration-700 hover:scale-[1.03] hover:z-20" style={{ objectPosition: project.imagePosition || 'top' }} />
+            <img src={images[1]} alt="" className="w-1/2 h-full object-cover transition-transform duration-700 hover:scale-[1.03] hover:z-20" style={{ objectPosition: project.imagePosition || 'top' }} />
           </div>
         )}
 
@@ -71,6 +71,7 @@ const ProjectMedia = ({ project }: { project: Project }) => {
               src={images[0]} 
               alt="" 
               className="absolute inset-0 w-full h-full object-cover opacity-80 transition-all duration-700 group-hover/media:scale-105 z-10" 
+              style={{ objectPosition: project.imagePosition || 'top' }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/40 to-black/80 z-20 pointer-events-none" />
             
