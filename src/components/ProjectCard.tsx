@@ -44,54 +44,46 @@ const ProjectMedia = ({ project }: { project: Project }) => {
 
   return (
     <div className="relative w-full aspect-[16/10] sm:aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none group/media transition-colors duration-300 shadow-sm">
-      <div className="flex-grow relative overflow-hidden flex items-center justify-center">
-        
-        {/* Dynamic Blurred Background for all layouts to fill gaps */}
-        <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-center opacity-30 blur-2xl scale-125"
-          style={{ backgroundImage: `url(${images[0]})` }}
-        />
+      <div className="flex-grow relative overflow-hidden flex items-center justify-center bg-black/40">
 
-        {/* Single Image Layout */}
+        {/* Single Image Layout (Full Cover) */}
         {images.length === 1 && (
           <img 
             src={images[0]} 
             alt={`${project.title} Preview`} 
-            className="w-full h-full object-cover sm:object-contain drop-shadow-2xl transition-transform duration-500 group-hover/media:scale-[1.02] z-10" 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover/media:scale-105 z-10" 
           />
         )}
 
-        {/* Double Image Layout (Side by Side) */}
+        {/* Double Image Layout (Side by Side Cover) */}
         {images.length === 2 && (
-          <div className="flex w-full h-full items-center justify-center gap-1 sm:gap-2 z-10 p-1">
-            <img src={images[0]} alt="" className="w-1/2 h-[95%] object-cover sm:object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 hover:z-20 rounded-md" />
-            <img src={images[1]} alt="" className="w-1/2 h-[95%] object-cover sm:object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 hover:z-20 rounded-md" />
+          <div className="flex w-full h-full items-center justify-center gap-1 z-10">
+            <img src={images[0]} alt="" className="w-1/2 h-full object-cover transition-transform duration-700 hover:scale-[1.03] hover:z-20" />
+            <img src={images[1]} alt="" className="w-1/2 h-full object-cover transition-transform duration-700 hover:scale-[1.03] hover:z-20" />
           </div>
         )}
 
-        {/* Collage/Fan Layout for 3+ Images */}
+        {/* Collage Layout for 3+ Images */}
         {images.length >= 3 && (
           <div className="relative w-full h-full flex items-center justify-center z-10">
-            {/* First image acts as the primary focus on the left/center */}
             <img 
               src={images[0]} 
               alt="" 
-              className="absolute left-0 w-[68%] sm:w-[70%] h-full object-cover sm:object-contain drop-shadow-2xl transition-all duration-500 group-hover/media:-translate-x-3 group-hover/media:scale-105 z-10" 
+              className="absolute inset-0 w-full h-full object-cover opacity-80 transition-all duration-700 group-hover/media:scale-105 z-10" 
             />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/40 to-black/80 z-20 pointer-events-none" />
             
-            {/* Remaining images fanned out like playing cards on the right */}
-            <div className="absolute right-0 w-[40%] h-full flex items-center justify-end perspective-[1000px] overflow-visible pr-2 sm:pr-4">
+            <div className="absolute right-0 w-[50%] h-full flex items-center justify-end perspective-[1000px] overflow-visible pr-4 z-30">
               {images.slice(1, 4).map((img, idx) => {
                 const zIndex = 30 - idx * 10;
                 let positionClasses = '';
                 
-                // Card fan positioning logic - optimized for maximum size
                 if (idx === 0) {
-                  positionClasses = 'right-[45%] sm:right-[50%] rotate-[-8deg] group-hover/media:rotate-[-12deg] group-hover/media:-translate-x-8 group-hover/media:-translate-y-2';
+                  positionClasses = 'right-[50%] rotate-[-10deg] group-hover/media:rotate-[-15deg] group-hover/media:-translate-x-6';
                 } else if (idx === 1) {
-                  positionClasses = 'right-[22%] sm:right-[25%] rotate-[-2deg] group-hover/media:rotate-[0deg] group-hover/media:-translate-y-6';
+                  positionClasses = 'right-[25%] rotate-[-2deg] group-hover/media:rotate-[0deg] group-hover/media:-translate-y-4';
                 } else {
-                  positionClasses = 'right-[0%] rotate-[6deg] group-hover/media:rotate-[12deg] group-hover/media:translate-x-8 group-hover/media:-translate-y-2';
+                  positionClasses = 'right-[0%] rotate-[8deg] group-hover/media:rotate-[15deg] group-hover/media:translate-x-6';
                 }
 
                 return (
@@ -99,7 +91,7 @@ const ProjectMedia = ({ project }: { project: Project }) => {
                     key={idx} 
                     src={img} 
                     alt="" 
-                    className={`w-[75%] sm:w-[85%] aspect-[9/19] object-cover rounded-[1rem] sm:rounded-[1.5rem] border-2 border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.8)] absolute transition-all duration-700 ease-out hover:!z-50 hover:!scale-110 cursor-pointer ${positionClasses}`}
+                    className={`w-[70%] sm:w-[80%] aspect-[9/19] object-cover rounded-[1rem] sm:rounded-[1.5rem] border-2 border-gray-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.8)] absolute transition-all duration-700 ease-out hover:!z-50 hover:!scale-110 cursor-pointer ${positionClasses}`}
                     style={{ zIndex }}
                   />
                 );

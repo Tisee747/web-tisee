@@ -98,8 +98,7 @@ export const projectsData: Project[] = [
     repoUrl: 'https://github.com/Tisee747/TelyuTalks',
     projectLayout: 'web',
     images: [
-      '/images/projects/telyutalk_web.png',
-      '/images/projects/telyutalk_login.png'
+      '/images/projects/telyutalk_web.png'
     ],
     version: 'v1.1.0',
     status: 'Live',
@@ -138,8 +137,7 @@ export const projectsData: Project[] = [
     repoUrl: 'https://github.com/Tisee747/mydormitory-backend',
     projectLayout: 'hybrid',
     images: [
-      '/images/projects/mydormitory_loginweb.png',
-      '/images/projects/mydormitory_absen.png'
+      '/images/projects/mydormitory_loginweb.png'
     ],
     version: 'v1.0.8',
     status: 'Beta',
