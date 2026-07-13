@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import LoadingScreen from "@/components/LoadingScreen";
-import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
 
@@ -41,7 +40,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-cyan-accent/30">
         <ThemeProvider>
           <LoadingScreen />
-          <CustomCursor />
           <ScrollProgress />
           <Navbar />
           <main className="flex-grow flex flex-col">{children}</main>
