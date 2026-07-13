@@ -12,6 +12,7 @@ export interface Project {
   demoUrl?: string;
   image?: string;
   images?: string[];
+  imagePosition?: string;
   projectLayout?: ProjectLayout;
   version?: string;
   status?: 'Live' | 'Beta' | 'Development' | 'Archived';

@@ -104,35 +104,33 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
               <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-accent/5 rounded-full blur-3xl transition-opacity group-hover:opacity-100 opacity-60 pointer-events-none" />
 
               <div>
-                {/* Browser Screenshot Mockup Window */}
-                <div className="relative w-full aspect-video md:h-[220px] rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-6 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm">
-                  {/* Browser Top Bar Controls */}
-                  <div className="bg-foreground/5 border-b border-card-border/60 px-3 py-2 flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
-                  </div>
-                  
-                  {/* Screenshot / Placeholder Area */}
-                  <div className="flex-grow flex flex-col items-center justify-center bg-black/15 dark:bg-black/25 text-center p-4">
-                    {projects[currentIndex].image ? (
-                      <img 
-                        src={projects[currentIndex].image} 
-                        alt={`${projects[currentIndex].title} Preview`}
-                        className="w-full h-full object-cover rounded-md"
-                      />
-                    ) : (
-                      <div className="flex flex-col items-center justify-center">
-                        <span className="text-[11px] font-mono font-bold text-foreground/45 mb-0.5 uppercase tracking-wider">
-                          [ Screenshot Preview ]
-                        </span>
-                        <span className="text-[10px] font-mono text-foreground/30">
-                          {projects[currentIndex].title} homepage
-                        </span>
+                {/* Project Screenshot */}
+                {(() => {
+                  const imgs = projects[currentIndex].images || (projects[currentIndex].image ? [projects[currentIndex].image] : []);
+                  if (imgs.length === 0) {
+                    return (
+                      <div className="relative w-full aspect-video md:h-[220px] rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-6 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm">
+                        <div className="flex-grow flex flex-col items-center justify-center bg-black/15 dark:bg-black/25 text-center p-4">
+                          <span className="text-[11px] font-mono font-bold text-foreground/45 mb-0.5 uppercase tracking-wider">
+                            [ Screenshot Preview ]
+                          </span>
+                          <span className="text-[10px] font-mono text-foreground/30">
+                            {projects[currentIndex].title} homepage
+                          </span>
+                        </div>
                       </div>
-                    )}
-                  </div>
-                </div>
+                    );
+                  }
+                  return (
+                    <div className="relative w-full aspect-video md:h-[220px] rounded-xl border border-card-border/80 overflow-hidden mb-6 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm bg-black/40">
+                      <img 
+                        src={imgs[0]} 
+                        alt={`${projects[currentIndex].title} Preview`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  );
+                })()}
 
                 {/* Tags row */}
                 <div className="flex flex-wrap gap-1.5 mb-3 pointer-events-none">

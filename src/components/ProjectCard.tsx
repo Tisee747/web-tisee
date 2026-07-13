@@ -52,6 +52,7 @@ const ProjectMedia = ({ project }: { project: Project }) => {
             src={images[0]} 
             alt={`${project.title} Preview`} 
             className="w-full h-full object-cover transition-transform duration-700 group-hover/media:scale-105 z-10" 
+            style={{ objectPosition: project.imagePosition || 'center' }}
           />
         )}
 
