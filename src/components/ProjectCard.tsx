@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, MouseEvent, useState, useEffect } from 'react';
+import { useRef, MouseEvent } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
@@ -25,21 +25,11 @@ const getTagColor = (tag: ProjectTag) => {
 };
 
 const ProjectMedia = ({ project }: { project: Project }) => {
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const images = project.images || (project.image ? [project.image] : []);
-
-  useEffect(() => {
-    if (images.length > 1) {
-      const interval = setInterval(() => {
-        setActiveImageIndex((prev) => (prev + 1) % images.length);
-      }, 3500);
-      return () => clearInterval(interval);
-    }
-  }, [images.length]);
 
   if (project.projectLayout === 'none' || images.length === 0) {
     return (
-      <div className="relative w-full aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm">
+      <div className="relative w-full aspect-[16/10] sm:aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm">
         <div className="flex-grow flex flex-col items-center justify-center bg-black/15 dark:bg-black/25 text-center p-4">
           <span className="text-[11px] font-mono font-bold text-foreground/45 mb-0.5 uppercase tracking-wider">
             [ Backend / System ]
@@ -53,7 +43,7 @@ const ProjectMedia = ({ project }: { project: Project }) => {
   }
 
   return (
-    <div className="relative w-full aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm relative group/media">
+    <div className="relative w-full aspect-[16/10] sm:aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none group/media transition-colors duration-300 shadow-sm">
       {/* Universal Top Bar for aesthetics */}
       <div className="bg-foreground/5 border-b border-card-border/60 px-3 py-2 flex items-center gap-1.5 relative z-20">
         <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
@@ -61,27 +51,62 @@ const ProjectMedia = ({ project }: { project: Project }) => {
         <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
       </div>
 
-      <div className="flex-grow relative bg-black/20 dark:bg-black/40 overflow-hidden flex items-center justify-center">
-        {images.map((img, idx) => (
-          <div
-            key={idx}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
-              idx === activeImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
-          >
-            {/* Blurred Backdrop for images that don't perfectly fit 16:9 */}
-            <div 
-              className="absolute inset-0 w-full h-full bg-cover bg-center opacity-40 blur-2xl scale-125"
-              style={{ backgroundImage: `url(${img})` }}
-            />
-            {/* Actual crisp image fitted nicely inside the container */}
-            <img
-              src={img}
-              alt={`${project.title} Preview ${idx + 1}`}
-              className="relative w-full h-full object-contain object-center drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] p-2"
-            />
+      <div className="flex-grow relative bg-gradient-to-br from-black/20 to-black/40 overflow-hidden flex items-center justify-center p-2 sm:p-4">
+        {/* Single Image Layout */}
+        {images.length === 1 && (
+          <img 
+            src={images[0]} 
+            alt={`${project.title} Preview`} 
+            className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover/media:scale-[1.02]" 
+          />
+        )}
+
+        {/* Double Image Layout (Side by Side) */}
+        {images.length === 2 && (
+          <div className="flex w-full h-full items-center justify-center gap-2 sm:gap-4">
+            <img src={images[0]} alt="" className="w-1/2 h-[90%] object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 hover:z-10" />
+            <img src={images[1]} alt="" className="w-1/2 h-[90%] object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 hover:z-10" />
           </div>
-        ))}
+        )}
+
+        {/* Collage/Fan Layout for 3+ Images */}
+        {images.length >= 3 && (
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* First image acts as the primary focus on the left/center */}
+            <img 
+              src={images[0]} 
+              alt="" 
+              className="absolute left-0 w-[65%] h-[90%] object-contain drop-shadow-[0_0_20px_rgba(0,0,0,0.6)] transition-all duration-500 group-hover/media:-translate-x-2 group-hover/media:scale-105 z-10" 
+            />
+            
+            {/* Remaining images fanned out like playing cards on the right */}
+            <div className="absolute right-0 w-[45%] h-[95%] flex items-center justify-end perspective-[1000px]">
+              {images.slice(1, 4).map((img, idx) => {
+                const zIndex = 30 - idx * 10;
+                let positionClasses = '';
+                
+                // Card fan positioning logic
+                if (idx === 0) {
+                  positionClasses = 'right-[30%] sm:right-[40%] rotate-[-8deg] group-hover/media:rotate-[-12deg] group-hover/media:-translate-x-6';
+                } else if (idx === 1) {
+                  positionClasses = 'right-[15%] sm:right-[20%] rotate-[-2deg] group-hover/media:rotate-[0deg] group-hover/media:-translate-y-4';
+                } else {
+                  positionClasses = 'right-[0%] rotate-[6deg] group-hover/media:rotate-[12deg] group-hover/media:translate-x-6 group-hover/media:translate-y-2';
+                }
+
+                return (
+                  <img 
+                    key={idx} 
+                    src={img} 
+                    alt="" 
+                    className={`w-[65%] sm:w-[75%] aspect-[9/19] object-cover rounded-xl border border-white/10 shadow-2xl absolute transition-all duration-700 ease-out hover:!z-50 hover:!scale-110 cursor-pointer ${positionClasses}`}
+                    style={{ zIndex }}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

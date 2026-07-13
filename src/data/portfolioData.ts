@@ -74,6 +74,7 @@ export const projectsData: Project[] = [
     technologies: ['Laravel', 'Flutter', 'PHP', 'Dart'],
     projectLayout: 'mobile',
     images: [
+      '/images/projects/nextevent_web.png',
       '/images/projects/nexevent_mobile_dashboard.jpg',
       '/images/projects/nexevent_mobile_login.jpg',
       '/images/projects/nexevent_mobile_tiket.jpg'
