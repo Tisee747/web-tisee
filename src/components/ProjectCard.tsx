@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, MouseEvent } from 'react';
+import { useRef, MouseEvent, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
@@ -22,6 +22,92 @@ const getTagColor = (tag: ProjectTag) => {
     default:
       return 'text-foreground/80 border-card-border bg-white/5';
   }
+};
+
+const ProjectMedia = ({ project }: { project: Project }) => {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const layout = project.projectLayout || 'web';
+  const images = project.images || (project.image ? [project.image] : []);
+
+  useEffect(() => {
+    if (images.length > 1 && layout === 'web') {
+      const interval = setInterval(() => {
+        setActiveImageIndex((prev) => (prev + 1) % images.length);
+      }, 3500);
+      return () => clearInterval(interval);
+    }
+  }, [images.length, layout]);
+
+  if (layout === 'none' || images.length === 0) {
+    return (
+      <div className="relative w-full aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm">
+        <div className="flex-grow flex flex-col items-center justify-center bg-black/15 dark:bg-black/25 text-center p-4">
+          <span className="text-[11px] font-mono font-bold text-foreground/45 mb-0.5 uppercase tracking-wider">
+            [ Backend / System ]
+          </span>
+          <span className="text-[10px] font-mono text-foreground/30">
+            {project.title}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (layout === 'mobile') {
+    return (
+      <div className="relative w-full aspect-video rounded-xl mb-5 flex items-center justify-center gap-3 select-none pointer-events-none overflow-hidden bg-black/5 dark:bg-white/5 border border-card-border/50">
+        {images.slice(0, 3).map((img, idx) => (
+          <div key={idx} className="relative h-[90%] aspect-[9/19] rounded-2xl border-[3px] border-gray-800 bg-black overflow-hidden shadow-xl transform transition-transform duration-500 hover:-translate-y-1">
+            <div className="absolute top-0 inset-x-0 h-3 bg-gray-800 rounded-b-xl w-1/2 mx-auto z-10" />
+            <img src={img} alt="" className="w-full h-full object-cover" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (layout === 'hybrid') {
+    const webImg = images[0];
+    const mobileImg = images[1] || images[0];
+    return (
+      <div className="relative w-full aspect-video rounded-xl mb-5 select-none pointer-events-none">
+        <div className="absolute top-0 left-0 w-[85%] h-[85%] rounded-xl border border-card-border/80 bg-black overflow-hidden flex flex-col shadow-lg group-hover:border-cyan-accent/30 transition-colors duration-300">
+          <div className="bg-foreground/5 border-b border-card-border/60 px-2 py-1.5 flex items-center gap-1">
+            <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
+            <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
+            <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
+          </div>
+          <img src={webImg} className="w-full h-full object-cover object-top" />
+        </div>
+        <div className="absolute bottom-0 right-2 h-[80%] aspect-[9/19] rounded-[14px] border-[3px] border-gray-800 bg-black overflow-hidden shadow-2xl z-10 transform transition-transform duration-500 group-hover:-translate-y-2 group-hover:-translate-x-2">
+          <div className="absolute top-0 inset-x-0 h-2 bg-gray-800 rounded-b-lg w-1/2 mx-auto z-10" />
+          <img src={mobileImg} className="w-full h-full object-cover" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative w-full aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm relative">
+      <div className="bg-foreground/5 border-b border-card-border/60 px-3 py-2 flex items-center gap-1.5 relative z-10">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+      </div>
+      <div className="flex-grow relative bg-black/15 dark:bg-black/25">
+        {images.map((img, idx) => (
+          <img
+            key={idx}
+            src={img}
+            alt={`${project.title} Preview ${idx + 1}`}
+            className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
+              idx === activeImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default function ProjectCard({ project, index }: { project: Project; index: number }) {
@@ -56,35 +142,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cyan-accent/5 to-magenta-accent/5 rounded-full blur-2xl -mr-16 -mt-16 opacity-40 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
 
       <div className="relative z-10 flex flex-col h-full">
-        {/* Browser Screenshot Mockup Window */}
-      <div className="relative w-full aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm">
-        {/* Browser Top Bar Controls */}
-        <div className="bg-foreground/5 border-b border-card-border/60 px-3 py-2 flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
-        </div>
-        
-        {/* Screenshot / Placeholder Area */}
-        <div className="flex-grow flex flex-col items-center justify-center bg-black/15 dark:bg-black/25 text-center p-4">
-          {project.image ? (
-            <img 
-              src={project.image} 
-              alt={`${project.title} Preview`}
-              className="w-full h-full object-cover rounded-md"
-            />
-          ) : (
-            <div className="flex flex-col items-center justify-center">
-              <span className="text-[11px] font-mono font-bold text-foreground/45 mb-0.5 uppercase tracking-wider">
-                [ Screenshot Preview ]
-              </span>
-              <span className="text-[10px] font-mono text-foreground/30">
-                {project.title} homepage
-              </span>
-            </div>
-          )}
-        </div>
-      </div>
+        <ProjectMedia project={project} />
 
       {/* Tags row */}
       <div className="flex flex-wrap gap-1.5 mb-3.5 pointer-events-none">

@@ -1,5 +1,7 @@
 export type ProjectTag = 'Backend' | 'AI' | 'Fullstack';
 
+export type ProjectLayout = 'web' | 'mobile' | 'hybrid' | 'none';
+
 export interface Project {
   id: string;
   title: string;
@@ -9,6 +11,8 @@ export interface Project {
   repoUrl?: string;
   demoUrl?: string;
   image?: string;
+  images?: string[];
+  projectLayout?: ProjectLayout;
   version?: string;
   status?: 'Live' | 'Beta' | 'Development' | 'Archived';
   stars?: number;
