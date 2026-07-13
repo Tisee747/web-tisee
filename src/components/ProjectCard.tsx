@@ -26,19 +26,18 @@ const getTagColor = (tag: ProjectTag) => {
 
 const ProjectMedia = ({ project }: { project: Project }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const layout = project.projectLayout || 'web';
   const images = project.images || (project.image ? [project.image] : []);
 
   useEffect(() => {
-    if (images.length > 1 && layout === 'web') {
+    if (images.length > 1) {
       const interval = setInterval(() => {
         setActiveImageIndex((prev) => (prev + 1) % images.length);
       }, 3500);
       return () => clearInterval(interval);
     }
-  }, [images.length, layout]);
+  }, [images.length]);
 
-  if (layout === 'none' || images.length === 0) {
+  if (project.projectLayout === 'none' || images.length === 0) {
     return (
       <div className="relative w-full aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm">
         <div className="flex-grow flex flex-col items-center justify-center bg-black/15 dark:bg-black/25 text-center p-4">
@@ -53,57 +52,35 @@ const ProjectMedia = ({ project }: { project: Project }) => {
     );
   }
 
-  if (layout === 'mobile') {
-    return (
-      <div className="relative w-full aspect-video rounded-xl mb-5 flex items-center justify-center gap-3 select-none pointer-events-none overflow-hidden bg-black/5 dark:bg-white/5 border border-card-border/50">
-        {images.slice(0, 3).map((img, idx) => (
-          <div key={idx} className="relative h-[90%] aspect-[9/19] rounded-2xl border-[3px] border-gray-800 bg-black overflow-hidden shadow-xl transform transition-transform duration-500 hover:-translate-y-1">
-            <div className="absolute top-0 inset-x-0 h-3 bg-gray-800 rounded-b-xl w-1/2 mx-auto z-10" />
-            <img src={img} alt="" className="w-full h-full object-cover" />
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (layout === 'hybrid') {
-    const webImg = images[0];
-    const mobileImg = images[1] || images[0];
-    return (
-      <div className="relative w-full aspect-video rounded-xl mb-5 select-none pointer-events-none">
-        <div className="absolute top-0 left-0 w-[85%] h-[85%] rounded-xl border border-card-border/80 bg-black overflow-hidden flex flex-col shadow-lg group-hover:border-cyan-accent/30 transition-colors duration-300">
-          <div className="bg-foreground/5 border-b border-card-border/60 px-2 py-1.5 flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
-            <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
-            <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
-          </div>
-          <img src={webImg} className="w-full h-full object-cover object-top" />
-        </div>
-        <div className="absolute bottom-0 right-2 h-[80%] aspect-[9/19] rounded-[14px] border-[3px] border-gray-800 bg-black overflow-hidden shadow-2xl z-10 transform transition-transform duration-500 group-hover:-translate-y-2 group-hover:-translate-x-2">
-          <div className="absolute top-0 inset-x-0 h-2 bg-gray-800 rounded-b-lg w-1/2 mx-auto z-10" />
-          <img src={mobileImg} className="w-full h-full object-cover" />
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="relative w-full aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm relative">
-      <div className="bg-foreground/5 border-b border-card-border/60 px-3 py-2 flex items-center gap-1.5 relative z-10">
+    <div className="relative w-full aspect-video rounded-xl border border-card-border/80 bg-black/10 dark:bg-white/5 overflow-hidden flex flex-col mb-5 select-none pointer-events-none group-hover:border-cyan-accent/20 transition-colors duration-300 shadow-sm relative group/media">
+      {/* Universal Top Bar for aesthetics */}
+      <div className="bg-foreground/5 border-b border-card-border/60 px-3 py-2 flex items-center gap-1.5 relative z-20">
         <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
       </div>
-      <div className="flex-grow relative bg-black/15 dark:bg-black/25">
+
+      <div className="flex-grow relative bg-black/20 dark:bg-black/40 overflow-hidden flex items-center justify-center">
         {images.map((img, idx) => (
-          <img
+          <div
             key={idx}
-            src={img}
-            alt={`${project.title} Preview ${idx + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
               idx === activeImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
-          />
+          >
+            {/* Blurred Backdrop for images that don't perfectly fit 16:9 */}
+            <div 
+              className="absolute inset-0 w-full h-full bg-cover bg-center opacity-40 blur-2xl scale-125"
+              style={{ backgroundImage: `url(${img})` }}
+            />
+            {/* Actual crisp image fitted nicely inside the container */}
+            <img
+              src={img}
+              alt={`${project.title} Preview ${idx + 1}`}
+              className="relative w-full h-full object-contain object-center drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] p-2"
+            />
+          </div>
         ))}
       </div>
     </div>
